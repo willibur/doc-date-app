@@ -48,13 +48,13 @@ export const File = ({ route }) => {
     <ScrollView>
       <Text>{JSON.stringify(dbResult)}</Text>
       {dbResult.map((r) => (
-        <Card key={r.id}>
+        <Card key={r.name}>
           <CardItem header>
             <Text>{r.name}</Text>
           </CardItem>
           <CardItem>
             <Body>
-              <Text>//Your text here</Text>
+              <Text>{r.description}</Text>
             </Body>
           </CardItem>
           <CardItem>
