@@ -16,27 +16,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ToolbarAndroid from "@react-native-community/toolbar-android";
-
-export const storeUserData = async (userData) => {
-  try {
-    // Javascript Objekt in String umwandeln mit JSON.stringify
-    const userString = JSON.stringify(userData);
-    await AsyncStorage.setItem("@user", userString);
-    console.log("Stored user data", userData);
-  } catch (e) {
-    console.error("Fehler beim Schreiben der Nutzerdaten", e);
-  }
-};
-
-export const readUserData = async () => {
-  try {
-    //  String in Javascript Objekt umwandeln mit JSON.parse
-    const userString = await AsyncStorage.getItem("@user");
-    return userString != null ? JSON.parse(userString) : null;
-  } catch (e) {
-    console.error("Fehler beim Lesen der Nutzerdaten", e);
-  }
-};
+import { storeUserData, readUserData } from "../userData.js";
 
 export const Profile = ({ navigation }) => {
   const [name, setName] = React.useState("");

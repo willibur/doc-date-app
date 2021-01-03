@@ -3,10 +3,19 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Profile } from "./components/Profile";
 import { File } from "./components/File";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import * as Notifications from "expo-notifications";
 
 const Tab = createMaterialBottomTabNavigator();
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Visits } from "./components/Visits";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 const DocDate = () => {
   return (
@@ -26,7 +35,7 @@ const DocDate = () => {
           name="Visits"
           component={Visits}
           options={{
-            tabBarLabel: "Termin",
+            tabBarLabel: "Termine",
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="calendar" color={color} size={26} />
             ),

@@ -13,13 +13,20 @@ import {
   Text,
   Title,
 } from "react-native-paper";
-import { NewVisit } from "./NewVisit";
+import { NewVisit } from "./NewVisits";
+import { getVisits } from "../DB";
 
 export const Visits = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
   const modalContainerStyle = { backgroundColor: "white", padding: 20 };
+
+  const [visits, setVisits] = React.useState([]);
+
+  React.useEffect(() => {
+    getVisits(setVisits);
+  });
 
   const newVisitModal = (
     <Provider>
@@ -35,12 +42,6 @@ export const Visits = ({ navigation }) => {
     </Provider>
   );
 
-  const newVisitButton = (
-    <Button style={{ marginTop: 30 }} onPress={showModal}>
-      New
-    </Button>
-  );
-
   const appbar = (
     <Appbar.Header>
       <Appbar.Content
@@ -50,10 +51,10 @@ export const Visits = ({ navigation }) => {
     </Appbar.Header>
   );
 
-  const content = (
-    <Card>
+  const content = visits.map((visit) => (
+    <Card key={visit.date} style={{ marginBottom: 10 }}>
       <Card.Title
-        title="Card Title"
+        title={visit.name}
         subtitle="Card Subtitle"
         left={LeftContent}
       />
@@ -67,13 +68,12 @@ export const Visits = ({ navigation }) => {
         <Button>Ok</Button>
       </Card.Actions>
     </Card>
-  );
+  ));
 
   return (
     <View>
       {appbar}
-      <ScrollView>
-        {newVisitButton}
+      <ScrollView style={{ paddingTop: 12, marginBottom: 70 }}>
         {content}
       </ScrollView>
       {newVisitModal}
