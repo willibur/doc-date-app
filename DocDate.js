@@ -6,21 +6,12 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 
 const Tab = createMaterialBottomTabNavigator();
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Visits } from "./components/Visits";
 
 const DocDate = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            tabBarLabel: "Profil",
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="account" color={color} size={26} />
-            ),
-          }}
-        />
         <Tab.Screen
           name="File"
           component={File}
@@ -28,6 +19,26 @@ const DocDate = () => {
             tabBarLabel: "Akte",
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="folder" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Visits"
+          component={Visits}
+          options={{
+            tabBarLabel: "Termin",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="calendar" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: "Profil",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
         />
