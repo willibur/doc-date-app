@@ -76,7 +76,7 @@ export const Checkup = ({ route }) => {
           <Card style={{ marginBottom: 12 }} key={checkup.id}>
             <Card.Title
               //left={LeftContent}
-              title={checkup.id}
+              title={checkup.name}
               subtitle={
                 checkup.age_max == 150
                   ? `Ab ${checkup.age_min} Jahre: ${checkup.interval}`
