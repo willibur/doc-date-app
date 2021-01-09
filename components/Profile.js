@@ -1,9 +1,8 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { Appbar } from "react-native-paper";
+import { Appbar, Button } from "react-native-paper";
 
 import {
-  Button,
   Left,
   Text,
   Right,
@@ -17,6 +16,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ToolbarAndroid from "@react-native-community/toolbar-android";
 import { storeUserData, readUserData } from "../userData.js";
+import { mainCol } from "../styles";
 
 export const Profile = ({ navigation }) => {
   const [name, setName] = React.useState("");
@@ -52,7 +52,7 @@ export const Profile = ({ navigation }) => {
       gender: gender,
       birthdate: date.getTime(),
     });
-    navigation.navigate("File", {
+    navigation.navigate("Checkup", {
       name: name,
       gender: gender,
       date: date,
@@ -71,12 +71,12 @@ export const Profile = ({ navigation }) => {
         onPress={() => setGender("female")}
       >
         <Left>
-          <Text>weiblich</Text>
+          <Text style={gender == "female" && { color: mainCol }}>weiblich</Text>
         </Left>
         <Right>
           <Radio
-            color={"#f0ad4e"}
-            selectedColor={"#5cb85c"}
+            color={mainCol}
+            selectedColor={mainCol}
             selected={gender == "female"}
             onPress={() => setGender("female")}
           />
@@ -84,12 +84,12 @@ export const Profile = ({ navigation }) => {
       </ListItem>
       <ListItem selected={gender == "male"} onPress={() => setGender("male")}>
         <Left>
-          <Text>männlich</Text>
+          <Text style={gender == "male" && { color: mainCol }}>männlich</Text>
         </Left>
         <Right>
           <Radio
-            color={"#f0ad4e"}
-            selectedColor={"#5cb85c"}
+            color={mainCol}
+            selectedColor={mainCol}
             selected={gender == "male"}
             onPress={() => setGender("male")}
           />
@@ -101,8 +101,11 @@ export const Profile = ({ navigation }) => {
   const birthdateInput = (
     <>
       <Text>{date !== defaultDate && `${date.toLocaleDateString()}`}</Text>
-      <Button onPress={() => setShowDatePicker(true)}>
-        <Text>Geburtsdatum ändern</Text>
+      <Button
+        style={{ backgroundColor: mainCol }}
+        onPress={() => setShowDatePicker(true)}
+      >
+        <Text style={{ color: "#ffffff" }}>Geburtsdatum ändern</Text>
       </Button>
       {showDatePicker && (
         <DateTimePicker
@@ -111,6 +114,7 @@ export const Profile = ({ navigation }) => {
           mode={"date"}
           is24Hour={true}
           display="calendar"
+          color={{ mainCol }}
           onChange={(event, date) => {
             setShowDatePicker(false);
             if (date !== undefined) {
@@ -123,7 +127,7 @@ export const Profile = ({ navigation }) => {
   );
 
   const appbar = (
-    <Appbar.Header>
+    <Appbar.Header style={{ backgroundColor: mainCol }}>
       <Appbar.Content title="Profil" subtitle={"Meine Daten"} />
       <Appbar.Action icon={"content-save"} onPress={save} />
     </Appbar.Header>

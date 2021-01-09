@@ -29,7 +29,7 @@ export const getVisits = (setDbResult) => {
   db.readTransaction(
     (tx) => {
       tx.executeSql(
-        `SELECT * FROM visits
+        `SELECT visits.id, date, name FROM visits
             INNER JOIN checkups ON visits.checkup_id = checkups.id
             INNER JOIN checkup_details ON checkups.checkup_details_id = checkup_details.id;`,
         [],
@@ -48,7 +48,7 @@ export const getPossibleCheckups = (age, userData, setDbResult) => {
   db.readTransaction(
     (tx) => {
       tx.executeSql(
-        `SELECT * FROM checkups
+        `SELECT checkups.id, age_min, age_max, description, interval, name FROM checkups
                   INNER JOIN checkup_details ON checkups.checkup_details_id = checkup_details.id
                   INNER JOIN genders ON checkup_details.gender_id = genders.id  
                   WHERE ? BETWEEN age_min AND age_max 

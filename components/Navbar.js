@@ -1,5 +1,6 @@
 import React from "react";
-import { Icon, Button, Text, Footer, FooterTab } from "native-base";
+import { Icon, Button, Text } from "native-base";
+
 export const Navbar = () => (
   <Footer>
     <FooterTab>
@@ -9,7 +10,7 @@ export const Navbar = () => (
       </Button>
       <Button vertical>
         <Icon name="camera" />
-        <Text>Akte</Text>
+        <Text>Vorsorge</Text>
       </Button>
       <Button vertical active>
         <Icon active name="navigate" />

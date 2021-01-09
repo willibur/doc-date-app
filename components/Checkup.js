@@ -17,8 +17,9 @@ import {
 import { getPossibleCheckups } from "../DB.js";
 import { useUserData } from "../userData.js";
 import { NewVisit } from "./NewVisits.js";
+import { mainCol, theme } from "../styles";
 
-export const File = ({ route }) => {
+export const Checkup = ({ route }) => {
   const [dbResult, setDbResult] = React.useState([]);
   const userData = useUserData();
 
@@ -62,8 +63,8 @@ export const File = ({ route }) => {
   );
 
   const appbar = (
-    <Appbar.Header>
-      <Appbar.Content title="Akte" subtitle={"Meine Vorsorgeuntersuchungen"} />
+    <Appbar.Header style={{ backgroundColor: mainCol }}>
+      <Appbar.Content title="Vorsorge" subtitle={"Meine Untersuchungen"} />
       <Appbar.Action icon={"dots-vertical"} onPress={() => {}} />
     </Appbar.Header>
   );
@@ -74,7 +75,8 @@ export const File = ({ route }) => {
         {dbResult.map((checkup) => (
           <Card style={{ marginBottom: 12 }} key={checkup.id}>
             <Card.Title
-              title={checkup.name}
+              //left={LeftContent}
+              title={checkup.id}
               subtitle={
                 checkup.age_max == 150
                   ? `Ab ${checkup.age_min} Jahre: ${checkup.interval}`
@@ -84,8 +86,9 @@ export const File = ({ route }) => {
             <Card.Content>
               <Paragraph>{checkup.description}</Paragraph>
             </Card.Content>
+            <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
             <Card.Actions style={{ alignSelf: "flex-end" }}>
-              <Button onPress={() => showModal(checkup)}>
+              <Button onPress={() => showModal(checkup)} color={mainCol}>
                 Termin eintragen
               </Button>
             </Card.Actions>
@@ -96,3 +99,7 @@ export const File = ({ route }) => {
     </View>
   );
 };
+
+const LeftContent = (props) => (
+  <Avatar.Icon {...props} icon="folder" theme={theme} />
+);

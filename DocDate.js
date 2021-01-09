@@ -1,13 +1,15 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, ThemeProvider } from "@react-navigation/native";
 import { Profile } from "./components/Profile";
-import { File } from "./components/File";
+import { Checkup } from "./components/Checkup";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import * as Notifications from "expo-notifications";
 
 const Tab = createMaterialBottomTabNavigator();
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Visits } from "./components/Visits";
+import { Calendar } from "./components/Calendar";
+import { mainCol } from "./styles";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -19,23 +21,26 @@ Notifications.setNotificationHandler({
 
 const DocDate = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{ colors: { background: "#eeeeee", primary: mainCol } }}
+    >
       <Tab.Navigator>
         <Tab.Screen
-          name="File"
-          component={File}
+          style={{ backgroundColor: mainCol }}
+          name="Checkup"
+          component={Checkup}
           options={{
-            tabBarLabel: "Akte",
+            tabBarLabel: "Vorsorge",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="folder" color={color} size={26} />
+              <MaterialCommunityIcons name="doctor" color={color} size={26} />
             ),
           }}
         />
         <Tab.Screen
-          name="Visits"
-          component={Visits}
+          name="Calendar"
+          component={Calendar}
           options={{
-            tabBarLabel: "Termine",
+            tabBarLabel: "Kalender",
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="calendar" color={color} size={26} />
             ),

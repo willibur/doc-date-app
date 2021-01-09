@@ -32,6 +32,7 @@ export const NewVisit = ({ checkup, hide }) => {
           value={date.toDate()}
           mode={showDatePicker ? "date" : "time"}
           is24Hour={true}
+          dismiss={() => {}}
           display="default"
           onChange={(event, date) => {
             if (date !== undefined) {
@@ -61,6 +62,7 @@ export const NewVisit = ({ checkup, hide }) => {
       <Card.Content>
         <Title>Termin für {checkup.name}</Title>
       </Card.Content>
+      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
       <Card.Actions style={{ alignSelf: "flex-end" }}>
         <Button
           onPress={() => {

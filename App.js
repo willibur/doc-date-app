@@ -24,7 +24,7 @@ export default class App extends React.Component {
     });
 
     // Datenbank vom dem asset-Ordner in den Ordner auf dem Android Gerät kopieren
-    // So findet SQLite.openDatabase die Datenbank
+    // So findet SQLite.openDatabase später die Datenbank
 
     // Ordner erstellen
     try {
@@ -32,6 +32,9 @@ export default class App extends React.Component {
     } catch (error) {
       // Ignorieren, wenn es diesen Ordner schon gibt
     }
+
+    await FileSystem.deleteAsync(dbPath);
+    // Kopieren
     await FileSystem.downloadAsync(
       Asset.fromModule(require("./assets/docdate.db")).uri,
       dbPath

@@ -15,8 +15,9 @@ import {
 } from "react-native-paper";
 import { NewVisit } from "./NewVisits";
 import { getVisits } from "../DB";
+import { mainCol, theme } from "../styles";
 
-export const Visits = ({ navigation }) => {
+export const Calendar = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
@@ -43,30 +44,26 @@ export const Visits = ({ navigation }) => {
   );
 
   const appbar = (
-    <Appbar.Header>
-      <Appbar.Content
-        title="Besuche"
-        subtitle={"Meine Vorsorgeuntersuchungs-Termine"}
-      />
+    <Appbar.Header style={{ backgroundColor: mainCol }}>
+      <Appbar.Content title="Kalender" subtitle={"Meine Termine"} />
     </Appbar.Header>
   );
 
   const content = visits.map((visit) => (
-    <Card key={visit.date} style={{ marginBottom: 10 }}>
+    <Card key={visit.id} style={{ marginBottom: 10 }}>
       <Card.Title
         title={visit.name}
         subtitle="Card Subtitle"
         left={LeftContent}
       />
       <Card.Content>
-        <Title>Card title</Title>
         <Paragraph>Card content</Paragraph>
       </Card.Content>
-      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-      <Card.Actions>
+
+      {/* <Card.Actions>
         <Button>Cancel</Button>
         <Button>Ok</Button>
-      </Card.Actions>
+      </Card.Actions> */}
     </Card>
   ));
 
@@ -81,4 +78,6 @@ export const Visits = ({ navigation }) => {
   );
 };
 
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => (
+  <Avatar.Icon {...props} icon="folder" theme={theme} />
+);
