@@ -1,10 +1,10 @@
 import React from "react";
-import { AppLoading } from "expo";
-import { Container, Text } from "native-base";
+import AppLoading from "expo-app-loading";
+import { Container } from "native-base";
 import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import DocDate from "./DocDate";
-import { dbDirectory, dbPath } from "./DB.js";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import DocDate from "./src/DocDate";
+import { dbDirectory, dbPath } from "./src/DB.js";
 import * as FileSystem from "expo-file-system";
 import { Asset } from "expo-asset";
 
@@ -32,8 +32,11 @@ export default class App extends React.Component {
     } catch (error) {
       // Ignorieren, wenn es diesen Ordner schon gibt
     }
-
-    await FileSystem.deleteAsync(dbPath);
+    try {
+      await FileSystem.deleteAsync(dbPath);
+    } catch (error) {
+      // Ignorieren, wenn die Datei nicht existiert
+    }
     // Kopieren
     await FileSystem.downloadAsync(
       Asset.fromModule(require("./assets/docdate.db")).uri,

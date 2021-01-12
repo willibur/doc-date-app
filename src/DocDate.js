@@ -9,7 +9,6 @@ const Tab = createMaterialBottomTabNavigator();
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Calendar } from "./components/Calendar";
 import { mainCol } from "./styles";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

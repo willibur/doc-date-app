@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
 import { Appbar, Button } from "react-native-paper";
-
 import {
   Left,
   Text,
@@ -13,8 +12,6 @@ import {
   View,
 } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import ToolbarAndroid from "@react-native-community/toolbar-android";
 import { storeUserData, readUserData } from "../userData.js";
 import { mainCol } from "../styles";
 
@@ -71,7 +68,9 @@ export const Profile = ({ navigation }) => {
         onPress={() => setGender("female")}
       >
         <Left>
-          <Text style={gender == "female" && { color: mainCol }}>weiblich</Text>
+          <Text style={gender == "female" ? { color: mainCol } : {}}>
+            weiblich
+          </Text>
         </Left>
         <Right>
           <Radio
@@ -84,7 +83,9 @@ export const Profile = ({ navigation }) => {
       </ListItem>
       <ListItem selected={gender == "male"} onPress={() => setGender("male")}>
         <Left>
-          <Text style={gender == "male" && { color: mainCol }}>männlich</Text>
+          <Text style={gender == "male" ? { color: mainCol } : {}}>
+            männlich
+          </Text>
         </Left>
         <Right>
           <Radio

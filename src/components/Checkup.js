@@ -10,8 +10,6 @@ import {
   Paragraph,
   Portal,
   Provider,
-  Text,
-  Title,
 } from "react-native-paper";
 
 import { getPossibleCheckups } from "../DB.js";

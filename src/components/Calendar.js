@@ -1,17 +1,14 @@
-import { View } from "native-base";
 import React from "react";
 import { ScrollView } from "react-native";
+import { View } from "native-base";
 import {
   Appbar,
   Avatar,
-  Button,
-  Card,
   Modal,
   Paragraph,
   Portal,
   Provider,
-  Text,
-  Title,
+  Card,
 } from "react-native-paper";
 import { NewVisit } from "./NewVisits";
 import { getVisits } from "../DB";
