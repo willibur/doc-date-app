@@ -39,6 +39,6 @@ export const useUserData = () => {
       }
     }
     run();
-  }, []);
+  });
   return userData;
 };

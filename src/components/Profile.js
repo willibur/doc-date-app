@@ -10,6 +10,9 @@ import {
   ListItem,
   Radio,
   View,
+  Label,
+  Form,
+  List,
 } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { storeUserData, readUserData } from "../userData.js";
@@ -49,64 +52,106 @@ export const Profile = ({ navigation }) => {
       gender: gender,
       birthdate: date.getTime(),
     });
-    navigation.navigate("Checkup", {
-      name: name,
-      gender: gender,
-      date: date,
-    });
+    navigation.navigate("Checkup");
   };
+
   const nameInput = (
-    <Item rounded>
+    <Item stackedLabel>
+      <Label
+        style={{
+          fontWeight: "bold",
+          color: "black",
+          paddingTop: 8,
+        }}
+      >
+        Name
+      </Label>
       <Input placeholder="Name" value={name} onChangeText={setName} />
     </Item>
   );
 
   const genderInput = (
     <>
-      <ListItem
-        selected={gender == "female"}
-        onPress={() => setGender("female")}
+      <Label
+        style={{
+          fontWeight: "bold",
+          color: "black",
+          paddingLeft: 16,
+          fontSize: 16,
+          paddingTop: 40,
+        }}
       >
-        <Left>
-          <Text style={gender == "female" ? { color: mainCol } : {}}>
-            weiblich
-          </Text>
-        </Left>
-        <Right>
-          <Radio
-            color={mainCol}
-            selectedColor={mainCol}
-            selected={gender == "female"}
-            onPress={() => setGender("female")}
-          />
-        </Right>
-      </ListItem>
-      <ListItem selected={gender == "male"} onPress={() => setGender("male")}>
-        <Left>
-          <Text style={gender == "male" ? { color: mainCol } : {}}>
-            männlich
-          </Text>
-        </Left>
-        <Right>
-          <Radio
-            color={mainCol}
-            selectedColor={mainCol}
-            selected={gender == "male"}
-            onPress={() => setGender("male")}
-          />
-        </Right>
-      </ListItem>
+        Geschlecht
+      </Label>
+      <List>
+        <ListItem
+          selected={gender == "female"}
+          onPress={() => setGender("female")}
+        >
+          <Left>
+            <Text style={gender == "female" ? { color: mainCol } : {}}>
+              weiblich
+            </Text>
+          </Left>
+          <Right>
+            <Radio
+              color={mainCol}
+              selectedColor={mainCol}
+              selected={gender == "female"}
+              onPress={() => setGender("female")}
+            />
+          </Right>
+        </ListItem>
+        <ListItem selected={gender == "male"} onPress={() => setGender("male")}>
+          <Left>
+            <Text style={gender == "male" ? { color: mainCol } : {}}>
+              männlich
+            </Text>
+          </Left>
+          <Right>
+            <Radio
+              color={mainCol}
+              selectedColor={mainCol}
+              selected={gender == "male"}
+              onPress={() => setGender("male")}
+            />
+          </Right>
+        </ListItem>
+      </List>
     </>
   );
 
   const birthdateInput = (
     <>
-      <Text>{date !== defaultDate && `${date.toLocaleDateString()}`}</Text>
+      <Item stackedLabel>
+        <Label
+          style={{
+            fontWeight: "bold",
+            color: "black",
+            fontSize: 16,
+            paddingTop: 32,
+          }}
+        >
+          Geburtstag
+        </Label>
+        <Input
+          placeholder="01.01.2021"
+          onTouchStart={() => setShowDatePicker(true)}
+        >
+          {date !== defaultDate && `${date.toLocaleDateString()}`}
+        </Input>
+      </Item>
+
       <Button
-        style={{ backgroundColor: mainCol }}
-        onPress={() => setShowDatePicker(true)}
+        style={{
+          backgroundColor: mainCol,
+          marginLeft: 16,
+          marginRight: 16,
+          marginTop: 40,
+        }}
+        onPress={save}
       >
-        <Text style={{ color: "#ffffff" }}>Geburtsdatum ändern</Text>
+        <Text style={{ color: "#ffffff" }}>Speichern</Text>
       </Button>
       {showDatePicker && (
         <DateTimePicker
@@ -130,16 +175,17 @@ export const Profile = ({ navigation }) => {
   const appbar = (
     <Appbar.Header style={{ backgroundColor: mainCol }}>
       <Appbar.Content title="Profil" subtitle={"Meine Daten"} />
-      <Appbar.Action icon={"content-save"} onPress={save} />
     </Appbar.Header>
   );
   return (
     <View>
       {appbar}
       <ScrollView>
-        {nameInput}
-        {genderInput}
-        {birthdateInput}
+        <Form>
+          {nameInput}
+          {genderInput}
+          {birthdateInput}
+        </Form>
       </ScrollView>
     </View>
   );
