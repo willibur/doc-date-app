@@ -2,7 +2,7 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { Container } from "native-base";
 import * as Font from "expo-font";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import DocDate from "./src/DocDate";
 import { dbDirectory, dbPath } from "./src/DB.js";
 import * as FileSystem from "expo-file-system";

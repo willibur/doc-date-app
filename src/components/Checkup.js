@@ -2,8 +2,6 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { View } from "native-base";
 import {
-  Appbar,
-  Avatar,
   Button,
   Card,
   Modal,
@@ -16,13 +14,14 @@ import { getPossibleCheckups } from "../DB.js";
 import { useUserData } from "../userData.js";
 import { NewVisit } from "./NewVisits.js";
 import { mainCol, theme } from "../styles";
+import { Headerbar } from "./Headerbar";
 
-export const Checkup = ({ route }) => {
+export const Checkup = () => {
   const [dbResult, setDbResult] = React.useState([]);
   const userData = useUserData();
 
   React.useEffect(() => {
-    console.log("Reading saved user");
+    console.log("Reading checkups for user");
     async function getDBData() {
       console.log("user datagurke", userData);
       if (userData != null) {
@@ -41,7 +40,9 @@ export const Checkup = ({ route }) => {
     setCheckupForVisit(checkup);
     setModalVisible(true);
   };
-  const hideModal = () => setModalVisible(false);
+  const hideModal = () => {
+    setModalVisible(false);
+  };
   const modalContainerStyle = { padding: 20 };
 
   const newVisitModal = (
@@ -60,23 +61,16 @@ export const Checkup = ({ route }) => {
     </Provider>
   );
 
-  const appbar = (
-    <Appbar.Header style={{ backgroundColor: mainCol }}>
-      <Appbar.Content title="Vorsorge" subtitle={"Meine Untersuchungen"} />
-      <Appbar.Action icon={"dots-vertical"} onPress={() => {}} />
-    </Appbar.Header>
-  );
   return (
     <View>
-      {appbar}
+      <Headerbar title="Vorsorge" subtitle="Meine Vorsorgeuntersuchungen" />
       <ScrollView style={{ paddingTop: 12, marginBottom: 70 }}>
         {dbResult.map((checkup) => (
           <Card style={{ marginBottom: 12 }} key={checkup.id}>
             <Card.Title
-              //left={LeftContent}
               title={checkup.name}
               subtitle={
-                checkup.age_max == 150
+                checkup.age_max == 150 // es gibt kein Höchstalter
                   ? `Ab ${checkup.age_min} Jahre: ${checkup.interval}`
                   : `Zwischen ${checkup.age_min} und ${checkup.age_max}: ${checkup.interval}`
               }
@@ -84,7 +78,11 @@ export const Checkup = ({ route }) => {
             <Card.Content>
               <Paragraph>{checkup.description}</Paragraph>
             </Card.Content>
-            <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+            <Card.Cover
+              source={{
+                uri: "https://source.unsplash.com/8u_2imJaVQs/400x200",
+              }}
+            />
             <Card.Actions style={{ alignSelf: "flex-end" }}>
               <Button onPress={() => showModal(checkup)} color={mainCol}>
                 Termin eintragen
@@ -97,7 +95,3 @@ export const Checkup = ({ route }) => {
     </View>
   );
 };
-
-const LeftContent = (props) => (
-  <Avatar.Icon {...props} icon="folder" theme={theme} />
-);

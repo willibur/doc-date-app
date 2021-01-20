@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { View } from "native-base";
 import {
-  Appbar,
   Avatar,
   Modal,
   Paragraph,
@@ -12,7 +11,8 @@ import {
 } from "react-native-paper";
 import { NewVisit } from "./NewVisits";
 import { getVisits } from "../DB";
-import { mainCol, theme } from "../styles";
+import { theme } from "../styles";
+import { Headerbar } from "./Headerbar";
 
 export const Calendar = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -40,12 +40,6 @@ export const Calendar = ({ navigation }) => {
     </Provider>
   );
 
-  const appbar = (
-    <Appbar.Header style={{ backgroundColor: mainCol }}>
-      <Appbar.Content title="Kalender" subtitle={"Meine Termine"} />
-    </Appbar.Header>
-  );
-
   const content = visits.map((visit) => (
     <Card key={visit.id} style={{ marginBottom: 10 }}>
       <Card.Title
@@ -66,7 +60,7 @@ export const Calendar = ({ navigation }) => {
 
   return (
     <View>
-      {appbar}
+      <Headerbar title="Kalender" subtitle="Meine Daten" />
       <ScrollView style={{ paddingTop: 12, marginBottom: 70 }}>
         {content}
       </ScrollView>

@@ -8,6 +8,9 @@ import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 
+import { mainCol, darkTextCol, theme } from "../styles";
+import { View } from "native-base";
+
 export const NewVisit = ({ checkup, hide }) => {
   moment.updateLocale("de", de);
   moment.locale("de");
@@ -62,26 +65,32 @@ export const NewVisit = ({ checkup, hide }) => {
       <Card.Content>
         <Title>Termin für {checkup.name}</Title>
       </Card.Content>
-      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+      <Card.Cover
+        source={{
+          uri: "https://source.unsplash.com/LPRrEJU2GbQ/400x200",
+        }}
+      />
       <Card.Actions style={{ alignSelf: "flex-end" }}>
         <Button
           onPress={() => {
             setShowDatePicker(true);
           }}
-          color="#333"
+          color={darkTextCol}
         >
           Ändern
         </Button>
-        <Button onPress={async () => await insertCheckup()}>Eintragen</Button>
+        <Button color={mainCol} onPress={async () => await insertCheckup()}>
+          Eintragen
+        </Button>
       </Card.Actions>
     </Card>
   );
 
   return (
-    <>
+    <View>
       {datePicker}
       {card}
-    </>
+    </View>
   );
 };
 

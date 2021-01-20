@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { Appbar, Button } from "react-native-paper";
 import {
   Left,
   Text,
@@ -13,10 +12,12 @@ import {
   Label,
   Form,
   List,
+  Button,
 } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { storeUserData, readUserData } from "../userData.js";
 import { mainCol } from "../styles";
+import { Headerbar } from "./Headerbar";
 
 export const Profile = ({ navigation }) => {
   const [name, setName] = React.useState("");
@@ -143,11 +144,14 @@ export const Profile = ({ navigation }) => {
       </Item>
 
       <Button
+        rounded
+        block
+        light
         style={{
           backgroundColor: mainCol,
           marginLeft: 16,
           marginRight: 16,
-          marginTop: 40,
+          marginTop: 36,
         }}
         onPress={save}
       >
@@ -160,7 +164,6 @@ export const Profile = ({ navigation }) => {
           mode={"date"}
           is24Hour={true}
           display="calendar"
-          color={{ mainCol }}
           onChange={(event, date) => {
             setShowDatePicker(false);
             if (date !== undefined) {
@@ -172,14 +175,9 @@ export const Profile = ({ navigation }) => {
     </>
   );
 
-  const appbar = (
-    <Appbar.Header style={{ backgroundColor: mainCol }}>
-      <Appbar.Content title="Profil" subtitle={"Meine Daten"} />
-    </Appbar.Header>
-  );
   return (
     <View>
-      {appbar}
+      <Headerbar title="Profil" subtitle="Meine Daten" />
       <ScrollView>
         <Form>
           {nameInput}
