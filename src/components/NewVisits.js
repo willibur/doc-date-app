@@ -108,6 +108,6 @@ async function schedulePushNotification(title, subtitle, body) {
         priority: "high",
       },
     },
-    trigger: { seconds: 2 },
+    trigger: { seconds: 2 }, // TODO: Set correct date
   });
 }

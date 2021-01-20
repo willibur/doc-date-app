@@ -1,7 +1,7 @@
 import * as FileSystem from "expo-file-system";
 import * as SQLite from "expo-sqlite";
 
-export const dbDirectory = FileSystem.documentDirectory + "SQLite/";
+export const dbDirectory = `${FileSystem.documentDirectory}/SQLite/`;
 export const dbName = "docdate.db";
 export const dbPath = dbDirectory + dbName;
 

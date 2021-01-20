@@ -8,23 +8,29 @@ import {
   Paragraph,
   Portal,
   Provider,
+  Text,
 } from "react-native-paper";
 
 import { getPossibleCheckups } from "../DB.js";
-import { useUserData } from "../userData.js";
+import { useUserData, readUserData } from "../userData.js";
 import { NewVisit } from "./NewVisits.js";
 import { mainCol, theme } from "../styles";
 import { Headerbar } from "./Headerbar";
+import { useIsFocused } from "@react-navigation/native";
 
 export const Checkup = () => {
-  const [dbResult, setDbResult] = React.useState([]);
   const userData = useUserData();
 
+  console.log("\n\n\n");
+  console.log("User data is", userData);
+  console.log("\n\n\n");
+  const [dbResult, setDbResult] = React.useState([]);
+
+  const isFocused = useIsFocused();
   React.useEffect(() => {
-    console.log("Reading checkups for user");
     async function getDBData() {
-      console.log("user datagurke", userData);
-      if (userData != null) {
+      if (userData != null && isFocused) {
+        console.log("Reading checkups for user", userData.name);
         const birthdate = new Date(userData.birthdate);
         const now = new Date();
         const age = now.getFullYear() - birthdate.getFullYear();
@@ -32,7 +38,7 @@ export const Checkup = () => {
       }
     }
     getDBData();
-  }, [userData]);
+  }, [userData, isFocused]);
 
   const [modalVisible, setModalVisible] = React.useState(false);
   const [checkupForVisit, setCheckupForVisit] = React.useState(null);
@@ -63,7 +69,14 @@ export const Checkup = () => {
 
   return (
     <View>
-      <Headerbar title="Vorsorge" subtitle="Meine Vorsorgeuntersuchungen" />
+      <Headerbar
+        title="Vorsorge"
+        subtitle={
+          userData
+            ? `${userData.name}s Vorsorgeuntersuchungen`
+            : `Vorsorgeuntersuchungen`
+        }
+      />
       <ScrollView style={{ paddingTop: 12, marginBottom: 70 }}>
         {dbResult.map((checkup) => (
           <Card style={{ marginBottom: 12 }} key={checkup.id}>

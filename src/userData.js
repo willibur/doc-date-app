@@ -25,8 +25,8 @@ export const readUserData = async () => {
 export const useUserData = () => {
   const [userData, setUserData] = React.useState(null);
   React.useEffect(() => {
-    console.log("Reading saved user");
     async function run() {
+      console.log("Reading saved user");
       const newUserData = await readUserData();
       if (
         userData === null ||
@@ -34,8 +34,8 @@ export const useUserData = () => {
         userData.name !== newUserData.name ||
         userData.gender !== newUserData.gender
       ) {
+        console.log("Refreshing user data to", newUserData);
         setUserData(newUserData);
-      } else {
       }
     }
     run();

@@ -47,8 +47,8 @@ export const Profile = ({ navigation }) => {
     fillInExistingUser();
   }, []);
 
-  const save = () => {
-    storeUserData({
+  const save = async () => {
+    await storeUserData({
       name: name,
       gender: gender,
       birthdate: date.getTime(),
