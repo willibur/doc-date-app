@@ -11,19 +11,20 @@ import * as Permissions from "expo-permissions";
 import { mainCol, darkTextCol, theme } from "../styles";
 import { View } from "native-base";
 
-export const NewVisit = ({ checkup, hide }) => {
+export const NewVisit = ({ checkup, hide, userData }) => {
   moment.updateLocale("de", de);
   moment.locale("de");
   const now = moment(Date.now());
   const [date, setDate] = React.useState(now);
   const [showDatePicker, setShowDatePicker] = React.useState(true);
   const [showTimePicker, setShowTimePicker] = React.useState(false);
+
   const insertCheckup = async () => {
     addNewVisit(date, checkup.id);
     await schedulePushNotification(
-      `${checkup.name}-Termin`,
+      `Hallo ${userData.name} dein nächster ${checkup.name}-Termin`,
       checkup.name,
-      `${date.format("LL")} um ${date.format("LT")} Uhr`
+      ` ist am ${date.format("LL")} um ${date.format("LT")} Uhr`
     );
     hide();
   };
