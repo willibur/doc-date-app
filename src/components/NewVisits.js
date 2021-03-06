@@ -24,7 +24,8 @@ export const NewVisit = ({ checkup, hide, userData }) => {
     await schedulePushNotification(
       `Hallo ${userData.name} dein nächster ${checkup.name}-Termin`,
       checkup.name,
-      ` ist am ${date.format("LL")} um ${date.format("LT")} Uhr`
+      ` ist am ${date.format("LL")} um ${date.format("LT")} Uhr`,
+      moment.duration(date.subtract(1, "days").diff(moment.now())).asSeconds()
     );
     hide();
   };
@@ -95,7 +96,7 @@ export const NewVisit = ({ checkup, hide, userData }) => {
   );
 };
 
-async function schedulePushNotification(title, subtitle, body) {
+async function schedulePushNotification(title, subtitle, body, inSeconds) {
   await Notifications.scheduleNotificationAsync({
     content: {
       title,
@@ -109,6 +110,6 @@ async function schedulePushNotification(title, subtitle, body) {
         priority: "high",
       },
     },
-    trigger: { seconds: 2 }, // TODO: Set correct date
+    trigger: { seconds: inSeconds },
   });
 }
