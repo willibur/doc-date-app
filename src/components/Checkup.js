@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { View, ListItem } from "native-base";
+import { View } from "native-base";
 import {
   Button,
   Card,
@@ -14,7 +14,7 @@ import {
 } from "react-native-paper";
 
 import { getPossibleCheckups } from "../DB.js";
-import { useUserData, readUserData } from "../userData.js";
+import { useUserData } from "../userData.js";
 import { NewVisit } from "./NewVisits.js";
 import { mainCol, theme } from "../styles";
 import { Headerbar } from "./Headerbar";

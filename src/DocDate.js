@@ -1,5 +1,4 @@
 import React from "react";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import * as Notifications from "expo-notifications";
 
 import { Navbar } from "./components/Navbar";

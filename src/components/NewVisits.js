@@ -2,13 +2,11 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import de from "moment/locale/de";
 import * as React from "react";
-import { Button, Card, Paragraph, Text, Title } from "react-native-paper";
+import { Button, Card, Title } from "react-native-paper";
 import { addNewVisit } from "../DB";
-import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
-import * as Permissions from "expo-permissions";
 
-import { mainCol, darkTextCol, theme } from "../styles";
+import { mainCol, darkTextCol } from "../styles";
 import { View } from "native-base";
 
 export const NewVisit = ({ checkup, hide, userData }) => {

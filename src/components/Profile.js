@@ -34,7 +34,6 @@ export const Profile = ({ navigation }) => {
   React.useEffect(() => {
     console.log("Reading saved user");
     // async geht nur wenn man hier eine funktion erstellt
-    // und sofort aufruft https://github.com/facebook/react/issues/14326
     async function fillInExistingUser() {
       const userData = await readUserData();
       if (userData != null) {
